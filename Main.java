@@ -1,5 +1,5 @@
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello and welcome!");
@@ -27,5 +27,26 @@ public class Main {
             bank.withdraw();
         });
         withdrawThread.start();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type 'exit' to stop the simulation.");
+
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("exit")) {
+                operationsQueue.stop();
+                try {
+                    simulationThread.join();
+                    depositThread.join();
+                    withdrawThread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Simulation stopped.");
+                break;
+            }
+        }
+
+        scanner.close();
     }
 }
