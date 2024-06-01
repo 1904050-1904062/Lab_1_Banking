@@ -14,7 +14,7 @@ public class OperationsQueue {
             add(random);
             System.out.println(i + ". New operation added: " + random);
             try {
-                Thread.sleep((int) (Math.random() * 80));
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
